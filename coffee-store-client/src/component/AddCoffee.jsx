@@ -1,4 +1,5 @@
 import React from 'react';
+import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
     const handleAddCoffee = e => {
@@ -21,6 +22,26 @@ const AddCoffee = () => {
             photo,
         }
         console.log(newCoffee)
+        fetch('http://localhost:5000/coffee', {
+            method: 'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(newCoffee)
+        })
+        .then(res=> res.json())
+        .then(data=>{
+            console.log(data)
+            if(data.insertedId){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "User added successfully!",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+        })
     }
     return (
         <div className='lg:w-3/4 mx-auto'>
