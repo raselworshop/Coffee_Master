@@ -36,10 +36,11 @@ const AddCoffee = () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "User added successfully!",
+                    title: "Coffee added successfully!",
                     showConfirmButton: false,
                     timer: 1500
                   });
+                  e.target.reset();
             }
         })
     }
