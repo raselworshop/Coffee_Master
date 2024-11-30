@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 const UpdateCoffee = () => {
     const coffee = useLoaderData();
-    console.log(coffee)
+    // console.log(coffee)
     const { photo, name, chef, taste, _id, category, supplier, details } = coffee;
 
     const handleUpdateCoffee=(e)=>{
@@ -18,7 +18,7 @@ const UpdateCoffee = () => {
         const photo = e.target.photo.value;
 
         const updatedCoffee = { name, chef, supplier, taste, category, details, photo }
-        console.log(updatedCoffee)
+        // console.log(updatedCoffee)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -39,7 +39,7 @@ const UpdateCoffee = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         if (data.modifiedCount > 0) {
                             Swal.fire({
                                 title: "Updated!",

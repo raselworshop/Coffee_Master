@@ -11,10 +11,10 @@ const SignUp = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email)
+        // console.log(email)
         createUser(email, password)
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 const createdAt = result.user?.metadata?.creationTime;
                 const newUser = { name, email, createdAt };
                 // save user info to the database 
@@ -27,14 +27,24 @@ const SignUp = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log('user created to db', data);
+                        // console.log('user created to db', data);
                         if (data.insertedId) {
-                            console.log('user created successfully!')
+                            // console.log('user created successfully!')
+                            Swal.fire({
+                                title: "Successfull!",
+                                text: "User successfully created an account.",
+                                icon: "success"
+                            });
                         }
                     })
             })
             .catch(error => {
-                console.log(error, 'the eorrr is')
+                // console.log(error, 'the eorrr is')
+                Swal.fire({
+                    title: error.message,
+                    text: "Some thing is wrong",
+                    icon: "error"
+                });
             })
     }
     return (

@@ -6,7 +6,7 @@ import Navbar from '../component/Navbar';
 const Root = () => {
     const loadedCoffees = useLoaderData();
     const [coffees, setCoffees] = useState(loadedCoffees)
-    console.log(coffees)
+    // console.log(coffees)
     return (
         <div className='max-w-7xl mx-auto my-12'>
             <Navbar></Navbar>

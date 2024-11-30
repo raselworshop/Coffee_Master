@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
     const handleAddCoffee = e => {
-        const location = useLocation();
+        // const location = useLocation();
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -23,7 +23,7 @@ const AddCoffee = () => {
             details,
             photo,
         }
-        console.log(newCoffee)
+        // console.log(newCoffee)
         fetch('http://localhost:5000/coffee', {
             method: 'POST',
             headers:{
@@ -33,7 +33,7 @@ const AddCoffee = () => {
         })
         .then(res=> res.json())
         .then(data=>{
-            console.log(data)
+            // console.log(data)
             if(data.insertedId){
                 Swal.fire({
                     position: "center",

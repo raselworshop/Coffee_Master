@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const SignIn = () => {
     const {signInUser,} = useContext(AuthContext)
@@ -9,10 +10,10 @@ const SignIn = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log('Email: ',email, 'Password: ',password)
+        // console.log('Email: ',email, 'Password: ',password)
         signInUser(email, password)
         .then(result=>{
-            console.log(result.user)
+            // console.log(result.user)
             const lastSignInTime = result?.user?.metadata?.lastSignInTime;
             const loginInfo = {email, lastSignInTime}
             fetch(`http://localhost:5000/users`, {
@@ -24,11 +25,16 @@ const SignIn = () => {
             })
             .then(res=> res.json())
             .then(data=>{
-                console.log(data, 'User login info updated in db')
+                // console.log(data, 'User login info updated in db')
             })
         })
         .catch(error=>{
-            console.log(error)
+            // console.log(error)
+            Swal.fire({
+                title: error.message,
+                text: "Need to solve this problem!!",
+                icon: "success"
+            });
         })
     }
     return (
