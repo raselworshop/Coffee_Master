@@ -1,8 +1,10 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
     const handleAddCoffee = e => {
+        const location = useLocation();
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
