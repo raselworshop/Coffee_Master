@@ -18,11 +18,11 @@ function Banner() {
                     style={{ backgroundImage: `url(${bannerHeaderBg})` }}
                 >
                     <img className="w-20" src={logo} alt="Espresso Emporium" />
-                    <h1 className="text-6xl">Espresso Emporium</h1>
+                    <h1 className="text-2xl md:text-4xl lg:text-6xl">Espresso Emporium</h1>
                 </div>
                 <div className=" hover:bg-black border border-white border-opacity-10 hover:border-opacity-80 hover:bg-opacity-50 py-10 px-4 rounded-lg 
                                 max-w-3xl relative transition duration-300 mr-2 hover:backdrop-blur-lg hover:shadow-lg filter group">
-                    <h1 className="text-3xl text-base-300 font-bold mb-4 group-hover:text-custom-yellow transition duration-300">
+                    <h1 className="text-xl md:text-2xl lg:text-3xl text-base-300 font-bold mb-4 group-hover:text-custom-yellow transition duration-300">
                         Would you like a Cup of Delicious Coffee?
                     </h1>
                     <p className="mb-6 text-base-300 group-hover:text-custom-yellow transition duration-300">

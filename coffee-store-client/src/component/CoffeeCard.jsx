@@ -52,13 +52,16 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                     <p>Taste: {taste}</p>
                 </div>
                 <div className="card-actions justify-end join join-vertical">
-                    <button className="btn join-item">View</button>
+                    <button className="btn join-item hover:bg-black 
+                        text-lg transition duration-300 hover:text-custom-yellow">View</button>
                     <Link to={`/updatecoffee/${_id}`}>
-                        <button className="btn join-item">Edit</button>
+                        <button className="btn join-item hover:bg-black 
+                        text-lg transition duration-300 hover:text-custom-yellow lg:px-6">Edit</button>
                     </Link>
                     <button
                         onClick={() => handleDelete(_id)}
-                        className="btn join-item bg-red-500">X</button>
+                        className="btn join-item bg-red-500 hover:bg-black 
+                        text-lg transition duration-300 hover:text-custom-yellow">X</button>
                 </div>
             </div>
         </div>

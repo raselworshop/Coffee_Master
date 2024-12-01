@@ -1,19 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-    const { user,setUser, signOutUser, setLoading } = useContext(AuthContext);
+    const { user, setUser, signOutUser, setLoading } = useContext(AuthContext);
+    const [showLogOut, setShowLogOut] = useState(false)
     const navigate = useNavigate();
     const handleSignOut = () => {
         signOutUser()
-            .then(()=>{
+            .then(() => {
                 setUser(null)
                 setLoading(false)
                 navigate('/')
             })
-            .catch(error=>{
+            .catch(error => {
                 setLoading(false)
                 Swal.fire({
                     title: error.message,
@@ -21,6 +22,9 @@ const Navbar = () => {
                     icon: "success"
                 })
             })
+    }
+    const handleShowLogOut = () => {
+        setShowLogOut(!showLogOut)
     }
     const links = <>
         <li><Link className="hover:bg-custom-yellow transition duration-300" to={'/'}>Home</Link></li>
@@ -60,9 +64,15 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {user ?<>
-                        <img className="w-10 h-10 rounded-xl mr-4" src={user.photoURL} alt="" />
-                        <button onClick={handleSignOut} className="btn hover:bg-custom-yellow transition duration-300">Log Out</button></>
+                    {user ? <>
+                        <img className="w-10 h-10 rounded-xl mr-4"
+                            src={user.photoURL} alt=""
+                            onClick={handleShowLogOut}
+                        />
+                        <div className={`lg:block ${showLogOut ? 'block': 'hidden'}`}>
+                        <button onClick={handleSignOut} className="btn hover:bg-custom-yellow transition duration-300">Log Out</button>
+                        </div>
+                        </>
                         : <button className="btn hover:bg-custom-yellow transition duration-300"><Link to={'/signin'}>Log in</Link></button>
                     }
                 </div>
