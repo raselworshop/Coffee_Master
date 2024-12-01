@@ -19,7 +19,7 @@ const Users = () => {
             if (result.isConfirmed) {
 
                 // it will dalete user from db
-                fetch(`http://localhost:5000/users/${id}`, {
+                fetch(`https://coffee-store-server-liart-ten.vercel.app/users/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

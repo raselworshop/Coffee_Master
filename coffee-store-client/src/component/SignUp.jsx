@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
     const { createUser, } = useContext(AuthContext)
@@ -18,7 +19,7 @@ const SignUp = () => {
                 const createdAt = result.user?.metadata?.creationTime;
                 const newUser = { name, email, createdAt };
                 // save user info to the database 
-                fetch('http://localhost:5000/users', {
+                fetch('https://coffee-store-server-liart-ten.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

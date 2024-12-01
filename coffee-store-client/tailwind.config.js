@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        rancho:["Rancho", 'cursive']
+      },
+      colors: { 'custom-yellow': 'rgba(227, 181, 119, 1)', },
+    },
   },
   plugins: [
     require('daisyui'),

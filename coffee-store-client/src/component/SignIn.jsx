@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const SignIn = () => {
-    const {signInUser,} = useContext(AuthContext)
+    const {signInUser,} = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleSignIn = e =>{
         e.preventDefault();
         const form = e.target;
@@ -16,7 +17,7 @@ const SignIn = () => {
             // console.log(result.user)
             const lastSignInTime = result?.user?.metadata?.lastSignInTime;
             const loginInfo = {email, lastSignInTime}
-            fetch(`http://localhost:5000/users`, {
+            fetch(`https://coffee-store-server-liart-ten.vercel.app/users`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'
@@ -25,6 +26,9 @@ const SignIn = () => {
             })
             .then(res=> res.json())
             .then(data=>{
+                if(data.matchedCount){
+                    navigate('/')
+                }
                 // console.log(data, 'User login info updated in db')
             })
         })

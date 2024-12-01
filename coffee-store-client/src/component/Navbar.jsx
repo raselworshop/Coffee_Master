@@ -1,14 +1,34 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+    const { user,setUser, signOutUser, setLoading } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const handleSignOut = () => {
+        signOutUser()
+            .then(()=>{
+                setUser(null)
+                setLoading(false)
+                navigate('/')
+            })
+            .catch(error=>{
+                setLoading(false)
+                Swal.fire({
+                    title: error.message,
+                    text: "Need to solve this problem!!",
+                    icon: "success"
+                })
+            })
+    }
     const links = <>
-    <li><Link to={'/'}>Home</Link></li>                           
-    <li><Link to={'/addcoffee'}>Add Coffee</Link></li>
-    <li><Link to={'/signin'}>Log in</Link></li>
-    <li><Link to={'/users'}>User</Link></li>
+        <li><Link className="hover:bg-custom-yellow transition duration-300" to={'/'}>Home</Link></li>
+        <li><Link className="hover:bg-custom-yellow transition duration-300" to={'/addcoffee'}>Add Coffee</Link></li>
+        <li><Link className="hover:bg-custom-yellow transition duration-300" to={'/users'}>User</Link></li>
     </>
     return (
-        <div>
+        <div className='max-w-7xl mx-auto my-5'>
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -32,7 +52,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">Coffee House</a>
+                    <a className="btn btn-ghost text-xl hover:bg-custom-yellow transition duration-300">Coffee House</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -40,7 +60,11 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    {user ?<>
+                        <img className="w-10 h-10 rounded-xl mr-4" src={user.photoURL} alt="" />
+                        <button onClick={handleSignOut} className="btn hover:bg-custom-yellow transition duration-300">Log Out</button></>
+                        : <button className="btn hover:bg-custom-yellow transition duration-300"><Link to={'/signin'}>Log in</Link></button>
+                    }
                 </div>
             </div>
         </div>
